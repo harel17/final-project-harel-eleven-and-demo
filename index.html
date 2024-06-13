@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/* עיצוב למסך הפתיחה */
+.opening-screen {
+  width: 100%;
+  height: 100vh;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.opening-screen button {
+  font-size: 24px;
+  padding: 10px 20px;
+  background-color:rgb(198, 0, 0);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-family: Arial, sans-serif; /* הוספת קטע זה עבור השינוי של הפונט */
+  color: white; /* הוספת קטע זה עבור השינוי של הצבע */
+  font-weight: bold;
+}
+
+.opening-screen h1 {
+ font-family: Arial, sans-serif; /* עיצוב הפונט */
+  font-size: 36px; /* גודל הפונט */
+  color: white; /* צבע הפונט */
+  text-align: center; /* יישור למרכז */
+  margin-bottom: 20px; /* הרחבת מרווח למטה */
+  font-weight: bold;
+}
+#strange {
+        width: 400px;
+          height: 224px;
+          top: 200px;
+          position: absolute;
+          margin-bottom: 20px; /* הרחבת מרווח למטה */
+          filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.5)); /* הוספת צל */
+}
+</style>
+<title>אילבן והדמגורגון</title>
+</head>
+<body>
+
+        
+  
+        <!-- מסך הפתיחה -->
+        <div class="opening-screen">
+            <img src="stranger.png" id="strange" />
+        <h1>אילבן והדמגורגון</h1>
+        <button onclick="startGame()">התחל משחק</button>
+        </div>
+
+        <!-- המשחק עצמו -->
+        <div id="game" style="display: none;">
+            <!DOCTYPE html>
+
+    <html lang="en">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+    
+    
+            #wizard {
+                    width: 200px;
+                    height: 200px;
+                    top: 70px;
+                    position: absolute;
+            }
+    
+            #demo {
+                    width: 200px;
+                    height: 200px;
+                    top: 50px;
+                    position: absolute;
+            }
+    
+            .container {
+                    min-width: 90vh;
+                    min-height: 85vh;
+                    margin: 10px;
+                    background-color: red;
+                    padding: 5vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+            }
+    
+            #timer {
+                position: absolute;
+                top: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 36px;
+                color: white;
+                font-family: Arial, sans-serif;
+                font-weight: bold;
+            }
+    
+                    #timer {
+                position: absolute;
+                z-index: 1;
+
+
+            }
+    
+            #button {
+                position: absolute;
+                z-index: 2;
+            }
+
+            #wizard, #demo {
+                position: absolute;
+                z-index: 0;
+            }
+          
+             button {
+                font-size: 24px;
+                padding: 10px 20px;
+                background-color:rgb(198, 0, 0);
+                border: none;
+                cursor: pointer;
+                outline: none;
+                font-family: Arial, sans-serif; /* הוספת קטע זה עבור השינוי של הפונט */
+                color: white; /* הוספת קטע זה עבור השינוי של הצבע */
+                font-weight: bold;
+                }
+            </style>
+    
+            <head>
+                    <title>אילבן והדמגורגון</title>
+            </head>
+    
+            <body>
+              
+                        <!-- תג ה-audio עם המוזיקה -->
+                        <audio id="background-music" loop>
+                            <source src="tune.mp3" type="audio/mpeg">
+                            הדפדפן שלך לא תומך בצליל זה.
+                        </audio>
+                    
+    
+                    <div class="container">
+                      <p id="timer">2:00</p>
+                     <img id="wizard" src="wizard.png">
+                      <button onclick="teleport()">החבא את אילבן מהדמגורגון</button>
+                      <img id="demo" src="demogorgon.png">
+                    </div>
+                            
+            </body>
+    
+            <script>
+                    const timerElement = document.getElementById("timer");
+                    const maxHeight = window.innerHeight -250;
+                    const maxWidth = window.innerWidth -150;
+                
+  
+                    function teleport() {
+
+                      // get the wizard image tag
+                      const wizard=document.getElementById("wizard");
+                      // get the demo image tag
+                      const demo=document.getElementById("demo");
+
+
+                      // randomise new top and a left positions for wizard
+                      const randomTopPosionwizard = Math.floor(Math.random() * maxHeight);
+                      const randomLeftPosionwizard = Math.floor(Math.random() * maxWidth);
+                      // randomise new top and a left positions for demo
+                      const randomTopPosiondemo = Math.floor(Math.random() * maxHeight);
+                      const randomLeftPosiondemo = Math.floor(Math.random() * maxWidth);
+
+
+                      // Display the images in their new place
+                      wizard.style.left = randomLeftPosionwizard + "px";
+                      wizard.style.top = randomTopPosionwizard + "px";
+
+                      demo.style.left = randomLeftPosiondemo + "px";
+                      demo.style.top = randomTopPosiondemo + "px";
+
+                      // keepInBounds(wizard);
+                      // keepInBounds(demo);
+
+                      // Check distance - as absolute numbers
+                      const distY = Math.abs(randomTopPosionwizard - randomTopPosiondemo);
+                      const distX = Math.abs(randomLeftPosionwizard - randomLeftPosiondemo);
+
+                      if((distX < 30 && distY < 180) || (distX < 180 && distY < 30)) {
+                        // alert('Oh no! Eleven got caught!');
+                        alert('Oh no! Eleven got caught!');
+                      }
+
+                    }
+
+
+                    // Update the timer every second
+                    function updateTimer() {
+                      const timerElement = document.getElementById("timer");
+                      const minutes = Math.floor(timeLeft / 60);
+                      const seconds = timeLeft % 60;
+                      timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                      if (timeLeft === 0) {
+                        clearInterval(timerInterval);
+                      } else {
+                        timeLeft--;
+                      }
+                    }
+    
+                    // Start the timer
+                    const timerInterval = setInterval(updateTimer, 1000);      
+                    let timeLeft = 120; // 2 minutes in seconds
+            </script>
+    </html>
+</div>
+
+<script>
+function startGame() {
+
+    // play the music
+    const au = document.getElementById('background-music');
+    au.play();
+
+  // הצגת המשחק וההסתרה של מסך הפתיחה
+  document.getElementById("game").style.display = "block";
+  document.querySelector(".opening-screen").style.display = "none";
+}
+</script>
+
+</body>
+</html>
